@@ -1,0 +1,20 @@
+bool canPair(vector<int> nums, int k) 
+{
+    if(nums.size()%2!=0)
+        return false;
+    unordered_map<int, int> m;
+    for(int i=0; i<nums.size(); ++i)
+        m[(nums[i]%k+k)%k]++;
+    for(int i=0; i<nums.size(); ++i)
+    {
+        int r=(nums[i]%k+k)%k;
+        if(r==0)
+        {
+            if(m[0]%2!=0)
+                return 0;
+        }
+        else if(m[r]!=m[k-r])
+            return 0;
+    }
+    return 1;
+}
