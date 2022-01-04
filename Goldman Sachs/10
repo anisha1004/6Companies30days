@@ -1,0 +1,3 @@
+We can keep a priority queue(min heap) of the 10 maximum numbers, 
+iterate through every input number and remove the head(smallest number) 
+whenever we encounter a number greater than it.
