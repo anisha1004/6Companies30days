@@ -1,0 +1,18 @@
+ull getNthUglyNo(int n) 
+{
+    vector<ull> v(n);
+    ull a=0, b=0, c=0;
+    v[0]=1;
+    for(int i=1; i<n; ++i)
+    {
+        ull x=min({2*v[a], 3*v[b], 5*v[c]});
+        v[i]=x;
+        if(v[i]==2*v[a])
+            a++;
+        if(v[i]==3*v[b])
+            b++;
+        if(v[i]==5*v[c])
+            c++;
+    }
+    return v[n-1];
+}
