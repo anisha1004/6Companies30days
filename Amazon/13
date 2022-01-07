@@ -1,0 +1,46 @@
+int orangesRotting(vector<vector<int>>& grid) 
+{
+    int fresh=0, rotten=0, ans=-1;
+    int n=grid.size(), m=grid[0].size();
+    queue<vector<int>> q;
+    vector<int> x={0, 0, 1, -1};
+    vector<int> y={1, -1, 0, 0};
+    for(int i=0; i<n; ++i)
+    {
+        for(int j=0; j<m; ++j)
+        {
+            if(grid[i][j]==1)
+                fresh++;
+            if(grid[i][j]==2)
+            {
+                q.push({i, j});
+                rotten++;
+            }
+        }
+    }
+    while(!q.empty())
+    {
+        ans++;
+        int size=q.size();
+        while(size--)
+        {
+            vector<int> temp=q.front();
+            q.pop();
+            for(int i=0; i<4; ++i)
+            {
+                int a=temp[0]+x[i], b=temp[1]+y[i];
+                if(a>=0 && b>=0 && a<n && b<m && grid[a][b]==1)
+                {
+                    grid[a][b]=2;
+                    q.push({a, b});
+                    fresh--;
+                }
+            }
+        }
+    }
+    if(fresh>0)
+        return -1;
+    if(ans==-1)
+        return 0;
+    return ans;
+}
