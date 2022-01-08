@@ -1,0 +1,16 @@
+void linkdelete(struct Node  *head, int m, int n)
+{
+    Node *curr=head;
+    while(curr)
+    {
+        for(int i=0; i<m-1 && curr->next; ++i)
+            curr=curr->next;
+        if(curr==NULL)
+                return;
+        Node *temp=curr;
+        for(int i=0; i<n && temp->next; ++i)
+            temp=temp->next;
+        curr->next=temp->next;
+        curr=curr->next;
+    }
+}
