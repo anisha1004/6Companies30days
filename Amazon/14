@@ -1,0 +1,69 @@
+int findMaxDist(unordered_map<Node*, Node*> &m, Node* target)
+{
+    queue<Node*> q;
+    q.push(target);
+    unordered_map<Node*, int> vis;
+    vis[target]=1;
+    int c=0;
+    while(!q.empty())
+    {
+        int n=q.size(), flag=0;
+        while(n--)
+        {
+            Node* temp=q.front();
+            q.pop();
+            if(temp->left && !vis[temp->left])
+            {
+                flag=1;
+                vis[temp->left]=1;
+                q.push(temp->left);
+            }
+            if(temp->right && !vis[temp->right])
+            {
+                flag=1;
+                vis[temp->right]=1;
+                q.push(temp->right);
+            }
+            if(m[temp] && !vis[m[temp]])
+            {
+                flag=1;
+                vis[m[temp]]=1;
+                q.push(m[temp]);
+            }
+        }
+        if(flag)
+            c++;
+    }
+    return c;
+}
+Node* bfsToMapParent(Node* root, unordered_map<Node*, Node*> &m, int target)
+{
+    queue<Node*> q;
+    q.push(root);
+    Node* res;
+    while(!q.empty())
+    {
+        Node *temp=q.front();
+        if(temp->data==target)
+            res=temp;
+        q.pop();
+        if(temp->left)
+        {
+            m[temp->left]=temp;
+            q.push(temp->left);
+        }
+        if(temp->right)
+        {
+            m[temp->right]=temp;
+            q.push(temp->right);
+        }
+    }
+    return res;
+}
+int minTime(Node* root, int target) 
+{
+    unordered_map<Node*, Node*> m;
+    Node* t=bfsToMapParent(root, m, target);
+    int ans=findMaxDist(m, t);
+    return ans;
+}
