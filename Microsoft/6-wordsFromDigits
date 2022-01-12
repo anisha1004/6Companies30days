@@ -1,0 +1,34 @@
+void helper(unordered_map<int, string> m, int a[], int n, int i, string res, vector<string> &ans)
+{
+    if(i==n)
+    {
+        ans.push_back(res);
+        return;
+    }
+    int key=a[i];
+    for(auto x: m[key])
+    {
+        res+=x;
+        helper(m, a, n, i+1, res, ans);
+        res.pop_back();
+    }
+}
+vector<string> possibleWords(int a[], int N)
+{
+    unordered_map<int, string> m;
+    m[1]="";
+    m[2]="abc";
+    m[3]="def";
+    m[4]="ghi";
+    m[5]="jkl";
+    m[6]="mno";
+    m[7]="pqrs";
+    m[8]="tuv";
+    m[9]="wxyz";
+    m[10]="*";
+    m[11]="0";
+    m[12]="#";
+    vector<string> ans;
+    helper(m, a, N, 0, "", ans);
+    return ans;
+}
