@@ -1,0 +1,29 @@
+void dfs(vector<vector<int>>& grid, int i, int j, int n, int m, int &temp)
+{
+    if(i<0 || i>=n || j<0 || j>=m || grid[i][j]==0)
+        return;
+    temp++;
+    grid[i][j]=0;
+    dfs(grid, i+1, j, n, m, temp);
+    dfs(grid, i-1, j, n, m, temp);
+    dfs(grid, i, j+1, n, m, temp);
+    dfs(grid, i, j-1, n, m, temp);
+    dfs(grid, i+1, j+1, n, m, temp);
+    dfs(grid, i+1, j-1, n, m, temp);
+    dfs(grid, i-1, j+1, n, m, temp);
+    dfs(grid, i-1, j-1, n, m, temp);
+}
+int findMaxArea(vector<vector<int>>& grid) {
+    int ans=INT_MIN, n=grid.size(), m=grid[0].size();
+    for(int i=0; i<n; ++i)
+    {
+        for(int j=0; j<m; ++j)
+        {
+            int temp=0;
+            if(grid[i][j]==1)
+                dfs(grid, i, j, n, m, temp);
+            ans=max(ans, temp);
+        }
+    }
+    return ans;
+}
