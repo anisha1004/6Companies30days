@@ -1,0 +1,15 @@
+int minSteps(int D)
+{
+    int c=0, sum=0;
+    while(sum<D)
+    {
+        sum+=c;
+        c++;
+    }
+    while((sum-D)%2)
+    {
+        sum+=c;
+        c++;
+    }
+    return c-1;
+}
