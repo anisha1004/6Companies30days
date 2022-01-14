@@ -1,0 +1,13 @@
+vector<int> calculateSpan(int p[], int n)
+{
+    vector<int> ans;
+    ans.push_back(1);
+    for(int i=1; i<n; ++i)
+    {
+        int c=1;
+        while(i-c>=0 && p[i]>=p[i-c])
+            c+=ans[i-c];
+        ans.push_back(c);
+    }
+    return ans;
+}
