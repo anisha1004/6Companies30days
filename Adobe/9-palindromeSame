@@ -1,0 +1,18 @@
+string nextPalin(string s) 
+{ 
+    string ans;
+    int n=s.size();
+    if(n<=3)
+        return "-1";
+    string temp=s.substr(0, n/2);
+    if(next_permutation(temp.begin(), temp.end()))
+    {
+        ans=temp;
+        if(n%2!=0)
+            ans+=s[n/2];
+        reverse(temp.begin(), temp.end());
+        ans+=temp;
+        return ans;
+    }
+    return "-1";
+}
