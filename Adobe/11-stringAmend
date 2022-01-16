@@ -1,0 +1,21 @@
+string amendSentence (string s)
+{
+    string ans="";
+    string temp="";
+    ans+=tolower(s[0]);
+    for(int i=1; i<s.size(); ++i)
+    {
+        if(isupper(s[i]))
+        {
+            ans+=temp;
+            ans+=' ';
+            temp="";
+            char ch=tolower(s[i]);
+            temp+=ch;
+        }
+        else
+            temp+=s[i];
+    }
+    ans+=temp;
+    return ans;
+}
