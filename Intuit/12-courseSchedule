@@ -1,0 +1,34 @@
+vector<int> findOrder(int n, vector<vector<int>>& prerequisites) 
+{
+    vector<vector<int>> g(n);
+    vector<int> inDeg(n, 0);
+    vector<int> ans;
+    for(auto x: prerequisites)
+    {
+        g[x[1]].push_back(x[0]);
+        ++inDeg[x[0]];
+    }
+    queue<int> q;
+    for(int i=0; i<n; ++i)
+    {
+        if(inDeg[i]==0)
+            q.push(i);
+    }
+    int c=0;
+    while(!q.empty())
+    {
+        c++;
+        int temp=q.front();
+        q.pop();
+        ans.push_back(temp);
+        for(auto x: g[temp])
+        {
+            --inDeg[x];
+            if(inDeg[x]==0)
+                q.push(x);
+        }
+    }
+    if(c==n)
+        return ans;
+    return {};
+}
