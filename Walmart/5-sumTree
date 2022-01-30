@@ -1,0 +1,12 @@
+int helper(Node *node)
+{
+    if(node==NULL)
+        return 0;
+    int temp=node->data;
+    node->data=helper(node->left)+helper(node->right);
+    return node->data+temp;
+}
+void toSumTree(Node *node)
+{
+    helper(node);
+}
